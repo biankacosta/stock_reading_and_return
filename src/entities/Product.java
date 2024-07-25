@@ -5,7 +5,7 @@ public class Product {
 	private double unitary_price;
 	private int quantity;
 	
-	Product(String name, double unitary_price, int quantity){
+	public Product(String name, double unitary_price, int quantity){
 		this.name = name;
 		this.unitary_price = unitary_price;
 		this.quantity = quantity;

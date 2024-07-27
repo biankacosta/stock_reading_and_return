@@ -17,33 +17,33 @@ public class Program {
 		File path_file = new File(path);
 		
 		String path_parent = path_file.getParent();
-		//System.out.println(path_parent);
 		
-		String exit_path = path_parent+"\\summary.csv";
+		new File(path_parent + "\\subdir").mkdir();
+		
+		String exit_path = path_parent+"\\subdir"+"\\summary.csv";
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			String line = br.readLine();
+			
+			BufferedWriter bw = new BufferedWriter(new FileWriter(exit_path));
 			
 			while (line != null) {
 				String[] product_info = line.split(",");
 				
 				Product p = new Product(product_info[0], Double.parseDouble(product_info[1]), Integer.parseInt(product_info[2]));
 				
-				BufferedWriter bw = new BufferedWriter(new FileWriter(exit_path));
-				bw.write("oi");
-				bw.write(p.getName()+","+p.getUnitary_price());
+				bw.write(p.getName()+","+p.totalPrice());
 				bw.newLine();
 				
 				line = br.readLine();
 			}
 			
+			bw.close();
+			
 		}
 		catch (IOException e) {
 			System.out.println("Error: " + e.getMessage());
 		}
-	
-		
-
 	}
 
 }
